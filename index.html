@@ -39,7 +39,7 @@
                         <i class="fa-solid fa-user absolute left-4 top-3.5 text-slate-400"></i>
                         <input type="text" id="student-id-input" placeholder="例如：1" class="w-full bg-slate-50 border border-slate-300 rounded-xl py-3 pl-10 pr-4 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 font-bold text-slate-700 transition-all">
                     </div>
-                    <p class="text-[11px] text-slate-400 mt-2 font-medium">💡 系統會自動將您的實驗數據同步至 Google Sheet 試算表。</p>
+                    <p class="text-[11px] text-slate-400 mt-2 font-medium">💡 系統會自動將您的實驗數據上傳同步至雲端系統。</p>
                 </div>
                 <button onclick="handleLogin()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
                     進入實驗室 <i class="fa-solid fa-arrow-right"></i>
@@ -50,24 +50,24 @@
 
     <!-- Main Application Wrapper (Hidden until logged in) -->
     <div id="app-wrapper" class="hidden flex-col min-h-screen">
-        <!-- Header -->
+        <!-- Header (Y-padding condensed to py-2.5 for iPad vertical space) -->
         <header class="bg-emerald-600 text-white shadow-md shrink-0">
-            <div class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap justify-between items-center gap-3">
+            <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-wrap justify-between items-center gap-3">
                 <div class="flex items-center gap-3">
-                    <div class="bg-white text-emerald-600 p-2 rounded-full shadow-inner flex items-center justify-center">
-                        <i class="fa-solid fa-leaf text-xl"></i>
+                    <div class="bg-white text-emerald-600 p-1.5 rounded-full shadow-inner flex items-center justify-center">
+                        <i class="fa-solid fa-leaf text-lg"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl sm:text-2xl font-black tracking-wider">蓮葉效應模擬實驗室</h1>
-                        <p class="text-xs text-emerald-100 font-medium">微觀結構與葉面疏水探究</p>
+                        <h1 class="text-lg sm:text-xl font-black tracking-wider">蓮葉效應模擬實驗室</h1>
+                        <p class="text-[10px] text-emerald-100 font-medium">微觀結構與葉面疏水探究</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-4">
-                    <div class="bg-emerald-700/50 rounded-lg px-3 py-1.5 text-sm font-bold border border-emerald-500/30 flex items-center gap-2">
+                    <div class="bg-emerald-700/50 rounded-lg px-2.5 py-1 text-xs font-bold border border-emerald-500/30 flex items-center gap-1.5">
                         <i id="user-role-icon" class="fa-solid fa-user-graduate text-emerald-200"></i>
                         <span id="display-student-id">學號</span>
                     </div>
-                    <button onclick="logout()" class="text-xs bg-rose-500 hover:bg-rose-600 text-white px-3 py-1.5 rounded-lg font-bold transition-all">
+                    <button onclick="logout()" class="text-[11px] bg-rose-500 hover:bg-rose-600 text-white px-2.5 py-1 rounded-md font-bold transition-all">
                         登出
                     </button>
                 </div>
@@ -75,71 +75,71 @@
         </header>
 
         <!-- Main Section -->
-        <main class="max-w-7xl w-full mx-auto px-6 py-6 flex-grow flex flex-col">
+        <main class="max-w-7xl w-full mx-auto px-6 py-3 flex-grow flex flex-col">
             
-            <!-- Tab Buttons -->
-            <div class="flex border-b border-emerald-200 mb-6 gap-2 shrink-0 overflow-x-auto pb-1">
-                <button id="tab-sim-btn" onclick="switchTab('sim')" class="px-6 py-3 bg-white text-emerald-700 border-t-4 border-emerald-600 font-bold rounded-t-lg shadow-sm flex items-center gap-2 transition-all whitespace-nowrap">
+            <!-- Tab Buttons (Margin reduced to mb-3) -->
+            <div class="flex border-b border-emerald-200 mb-3 gap-2 shrink-0 overflow-x-auto pb-1">
+                <button id="tab-sim-btn" onclick="switchTab('sim')" class="px-5 py-2 bg-white text-emerald-700 border-t-4 border-emerald-600 text-sm font-bold rounded-t-lg shadow-sm flex items-center gap-2 transition-all whitespace-nowrap">
                     <i class="fa-solid fa-flask"></i> 第一頁：模擬實驗
                 </button>
-                <button id="tab-chart-btn" onclick="switchTab('chart')" class="px-6 py-3 bg-emerald-50 text-slate-500 hover:text-emerald-700 font-bold rounded-t-lg flex items-center gap-2 transition-all whitespace-nowrap">
+                <button id="tab-chart-btn" onclick="switchTab('chart')" class="px-5 py-2 bg-emerald-50 text-slate-500 hover:text-emerald-700 text-sm font-bold rounded-t-lg flex items-center gap-2 transition-all whitespace-nowrap">
                     <i class="fa-solid fa-chart-bar"></i> 第二頁：個人數據
                 </button>
-                <button id="tab-class-btn" onclick="switchTab('class')" class="hidden px-6 py-3 bg-amber-50 text-slate-500 hover:text-amber-700 font-bold rounded-t-lg items-center gap-2 transition-all whitespace-nowrap">
+                <button id="tab-class-btn" onclick="switchTab('class')" class="hidden px-5 py-2 bg-amber-50 text-slate-500 hover:text-amber-700 text-sm font-bold rounded-t-lg items-center gap-2 transition-all whitespace-nowrap">
                     <i class="fa-solid fa-users"></i> 第三頁：全班棒形圖 <span id="class-tab-status" class="bg-slate-200 text-slate-600 text-[10px] px-2 py-0.5 rounded-full ml-1">未解鎖</span>
                 </button>
             </div>
 
             <!-- ================= PAGE 1: SIMULATION ================= -->
-            <div id="tab-sim" class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-grow items-stretch">
+            <div id="tab-sim" class="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-grow items-stretch">
                 
                 <!-- Left Controls & Micro-zoom Visual (5 cols) -->
-                <div class="lg:col-span-5 flex flex-col gap-5 justify-between">
+                <div class="lg:col-span-5 flex flex-col gap-3 justify-between">
                     
-                    <!-- Main Control Card -->
-                    <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm flex flex-col justify-between flex-grow">
+                    <!-- Main Control Card (Padding reduced to p-4) -->
+                    <div class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm flex flex-col justify-between flex-grow">
                         <div>
-                            <div class="flex justify-between items-center mb-4">
-                                <div class="flex items-center gap-2">
-                                    <span class="bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-md text-xs font-bold">控制台</span>
-                                    <h2 class="font-bold text-lg text-slate-800">調整奈米級纖毛數量</h2>
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-md text-[11px] font-bold">控制台</span>
+                                    <h2 class="font-bold text-sm sm:text-base text-slate-800">調整奈米級纖毛數量</h2>
                                 </div>
-                                <div id="sync-indicator" class="text-xs flex items-center gap-1 text-slate-400 font-bold">
+                                <div id="sync-indicator" class="text-[11px] flex items-center gap-1 text-slate-400 font-bold">
                                     <span class="h-2 w-2 rounded-full bg-slate-300 inline-block"></span> 雲端同步準備中
                                 </div>
                             </div>
                             
                             <!-- Slider Control -->
-                            <div class="mb-5">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-sm font-semibold text-slate-500">葉面上纖毛密度</span>
-                                    <span class="text-3xl font-black text-emerald-600" id="cilia-val-display">100</span>
+                            <div class="mb-4">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-semibold text-slate-500">葉面上纖毛密度</span>
+                                    <span class="text-2xl font-black text-emerald-600" id="cilia-val-display">0</span>
                                 </div>
                                 
-                                <input type="range" id="cilia-slider" min="100" max="10000" step="100" value="100" 
-                                       class="w-full h-3.5 bg-emerald-100 rounded-lg appearance-none cursor-pointer accent-emerald-600"
+                                <input type="range" id="cilia-slider" min="0" max="10000" step="100" value="0" 
+                                       class="w-full h-2.5 bg-emerald-100 rounded-lg appearance-none cursor-pointer accent-emerald-600"
                                        oninput="updateCiliaValue(this.value)">
                                 
-                                <div class="flex justify-between text-xs text-slate-400 mt-2 font-bold">
-                                    <span>極少 (100)</span>
+                                <div class="flex justify-between text-[10px] text-slate-400 mt-1 font-bold">
+                                    <span>極少 (0)</span>
                                     <span>極密 (10,000)</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Water Droplet Micro-Zoom Shape Visualizer (HEIGHT ENLARGED to h-56) -->
+                        <!-- Water Droplet Micro-Zoom Shape Visualizer -->
                         <div class="bg-slate-50 border border-slate-200/60 rounded-xl p-4 my-2 flex-grow flex flex-col">
-                            <div class="flex justify-between items-center mb-2 shrink-0">
+                            <div class="flex justify-between items-center mb-1.5 shrink-0">
                                 <span class="text-sm font-extrabold text-emerald-800"><i class="fa-solid fa-magnifying-glass-plus text-emerald-600"></i> 葉面微觀水滴放大觀察區</span>
                             </div>
-                            <div class="h-56 w-full bg-slate-900 rounded-lg overflow-hidden border border-slate-300 relative flex-grow">
+                            <div class="h-44 w-full bg-slate-900 rounded-lg overflow-hidden border border-slate-300 relative flex-grow">
                                 <canvas id="microCanvas" class="w-full h-full block"></canvas>
                             </div>
                         </div>
 
                         <!-- Run button -->
-                        <div class="mt-4 shrink-0">
-                            <button id="start-btn" onclick="startSimulation()" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold py-4 px-6 rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 text-lg">
+                        <div class="mt-2 shrink-0">
+                            <button id="start-btn" onclick="startSimulation()" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 text-base">
                                 <i class="fa-solid fa-play"></i> 進行模擬實驗 (將自動上傳記錄)
                             </button>
                         </div>
@@ -147,44 +147,44 @@
                 </div>
 
                 <!-- Right Canvas Simulation & Simple Results Display (7 cols) -->
-                <div class="lg:col-span-7 flex flex-col gap-6 justify-between">
+                <div class="lg:col-span-7 flex flex-col gap-4 justify-between">
                     
                     <!-- Main Canvas Viewport -->
-                    <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm flex flex-col flex-grow">
-                        <div class="flex justify-between items-center mb-3">
+                    <div class="bg-white border border-slate-100 rounded-xl p-3 shadow-sm flex flex-col flex-grow">
+                        <div class="flex justify-between items-center mb-2">
                             <div class="flex items-center gap-2">
-                                <span class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded text-xs font-bold">模擬視窗</span>
-                                <h3 class="font-bold text-slate-800">葉面水滴滾落動態模擬</h3>
+                                <span class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded text-[10px] font-bold">模擬視窗</span>
+                                <h3 class="text-xs sm:text-sm font-bold text-slate-800">葉面水滴滾落動態模擬</h3>
                             </div>
-                            <span id="sim-badge" class="px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-xs font-bold">待機中</span>
+                            <span id="sim-badge" class="px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-[10px] font-bold">待機中</span>
                         </div>
 
                         <!-- Dynamic Canvas Container -->
-                        <div class="relative bg-slate-950 rounded-xl overflow-hidden aspect-[4/3] w-full border border-slate-200">
+                        <div class="relative bg-slate-950 rounded-lg overflow-hidden aspect-[16/10] w-full border border-slate-200">
                             <canvas id="simCanvas" class="w-full h-full block"></canvas>
                             
-                            <div class="absolute top-2 left-1/2 transform -translate-x-1/2 bg-blue-500/90 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 shadow">
+                            <div class="absolute top-2 left-1/2 transform -translate-x-1/2 bg-blue-500/90 text-white px-2.5 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-1 shadow">
                                 <i class="fa-solid fa-cloud-showers-heavy"></i> 降水測試源 (共 20 顆水滴)
                             </div>
 
                             <div id="canvas-overlay" class="absolute inset-0 bg-slate-950/50 flex flex-col justify-center items-center text-white p-6 text-center transition-all duration-300">
-                                <div class="bg-emerald-600 p-4 rounded-full mb-3 shadow-lg animate-bounce">
-                                    <i class="fa-solid fa-flask-ripple text-2xl"></i>
+                                <div class="bg-emerald-600 p-3.5 rounded-full mb-2.5 shadow-lg animate-bounce">
+                                    <i class="fa-solid fa-flask-ripple text-xl"></i>
                                 </div>
-                                <h4 class="font-bold text-lg mb-1">請開始進行實驗</h4>
-                                <p class="text-xs text-slate-300 max-w-sm">點選左下方按鈕觀察水滴落滑，系統將會全自動記錄數據</p>
+                                <h4 class="font-bold text-base mb-0.5">請開始進行實驗</h4>
+                                <p class="text-[11px] text-slate-300 max-w-sm">點選左下方按鈕觀察水滴落滑，系統將會全自動記錄數據</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Single Stat Panel for Remaining Droplets -->
-                    <div class="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm text-center flex flex-col justify-center items-center shrink-0 min-h-[140px]">
-                        <span class="text-sm font-bold text-slate-400 uppercase tracking-wider block mb-2"><i class="fa-solid fa-droplet text-blue-400"></i> 葉面殘留水滴數量</span>
-                        <div class="my-1">
-                            <span id="stat-remain-count" class="text-6xl font-black text-slate-700">--</span>
-                            <span class="text-xl font-bold text-slate-400"> 顆</span>
+                    <div class="bg-white border border-slate-100 rounded-xl p-3 shadow-sm text-center flex flex-col justify-center items-center shrink-0 min-h-[110px]">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1"><i class="fa-solid fa-droplet text-blue-400"></i> 葉面殘留水滴數量</span>
+                        <div class="my-0.5">
+                            <span id="stat-remain-count" class="text-5xl font-black text-slate-700">--</span>
+                            <span class="text-lg font-bold text-slate-400"> 顆</span>
                         </div>
-                        <span id="stat-remain-desc" class="text-xs text-slate-500 font-bold mt-2">（總降水共 20 顆）</span>
+                        <span id="stat-remain-desc" class="text-[11px] text-slate-500 font-bold">（總降水共 20 顆）</span>
                     </div>
 
                 </div>
@@ -192,85 +192,49 @@
 
             <!-- ================= PAGE 2: CHARTS & DATA (Personal) ================= -->
             <div id="tab-chart" class="hidden">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-                    <!-- Left: Historical Data Table -->
-                    <div class="lg:col-span-4 bg-white border border-slate-100 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-lg text-slate-800 mb-2 flex items-center gap-2">
-                                <i class="fa-solid fa-list-check text-emerald-600"></i>
-                                我的個人實驗數據
-                            </h3>
-                            <p class="text-xs text-slate-500 mb-4">
-                                系統在每次實驗結束後，均會全自動記錄並上傳至雲端試算表。
-                            </p>
-                            <div class="mb-4 bg-slate-100 rounded-full h-2.5 w-full overflow-hidden">
-                                <div id="progress-bar" class="bg-emerald-500 h-full transition-all duration-500" style="width: 0%"></div>
+                <div class="w-full bg-white border border-slate-100 rounded-xl p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-800 flex items-center gap-2">
+                                    <i class="fa-solid fa-chart-column text-emerald-600"></i>
+                                    個人數據棒形圖與微觀水滴對照
+                                </h3>
+                                <p class="text-xs text-slate-500 mt-0.5">橫軸：纖毛數量（根）與對應水滴形變 | 縱軸：殘留水滴數量（顆）</p>
                             </div>
-                            <p id="progress-text" class="text-xs font-bold text-emerald-700 mb-4 text-center">進度：0 / 5 次</p>
-                            <p class="text-[11px] text-slate-400 mb-4 bg-slate-50 p-2 rounded border border-dashed border-slate-200">
-                                💡 成功測量 5 組<b>不重複的纖毛數量</b>，即可解除鎖定「第三頁：全班棒形圖」，觀察與分析大數據喔！
-                            </p>
-
-                            <div id="empty-table-state" class="py-12 text-center">
-                                <p class="text-3xl mb-2">📊</p>
-                                <p class="text-sm font-bold text-slate-400">目前還沒有實驗記錄喔！</p>
-                            </div>
-
-                            <div id="data-table-container" class="hidden overflow-x-auto max-h-[350px] overflow-y-auto">
-                                <table class="w-full text-left text-sm">
-                                    <thead class="sticky top-0 bg-white">
-                                        <tr class="bg-slate-50 text-slate-500 uppercase text-xs border-b border-slate-100">
-                                            <th class="py-2 px-3 font-bold">組別</th>
-                                            <th class="py-2 px-3 font-bold">纖毛數量</th>
-                                            <th class="py-2 px-3 font-bold">殘留水滴</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="data-table-body" class="divide-y divide-slate-100">
-                                        <!-- Dynamic rows -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Bar Chart Visualizer -->
-                    <div class="lg:col-span-8 bg-white border border-slate-100 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-6">
-                                <div>
-                                    <h3 class="font-bold text-lg text-slate-800 flex items-center gap-2">
-                                        <i class="fa-solid fa-chart-column text-emerald-600"></i>
-                                        個人數據棒形圖
-                                    </h3>
-                                    <p class="text-xs text-slate-500 mt-0.5">橫軸：組別 (1, 2, 3...) | 縱軸：殘留水滴數量（顆）</p>
-                                </div>
-                                <span class="px-3 py-1 bg-amber-50 text-amber-700 font-bold text-[11px] rounded-full border border-amber-200">
+                            <div class="flex items-center gap-3">
+                                <span id="progress-text-p2" class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">測試進度：0 / 5 次</span>
+                                <span class="px-2.5 py-1 bg-amber-50 text-amber-700 font-bold text-[10px] rounded-full border border-amber-200">
                                     規則：0 的數棒不顯示，僅標示數字
                                 </span>
                             </div>
+                        </div>
 
-                            <div class="h-80 w-full relative flex flex-col justify-end border-b-2 border-l-2 border-slate-300 pb-2 pl-6 pt-8 mt-4">
-                                <!-- Y Axis labels (0 to 20) -->
-                                <div class="absolute left-[-45px] top-0 bottom-8 flex flex-col justify-between text-[11px] font-bold text-slate-400 text-right w-10">
-                                    <span>20 顆</span>
-                                    <span>15 顆</span>
-                                    <span>10 顆</span>
-                                    <span>5 顆</span>
-                                    <span>0 顆</span>
-                                </div>
+                        <!-- Spacious Full-Width Chart Area with extra bottom padding for SVGs (pb changed to pb-40 for 3x larger water drops) -->
+                        <div class="h-[420px] w-full relative flex flex-col justify-end border-b-2 border-l-2 border-slate-300 pb-40 pl-6 pt-6 mt-6 max-w-5xl mx-auto">
+                            <!-- Y Axis labels (0 to 20) with matching bottom bounds (bottom-40) -->
+                            <div class="absolute left-[-45px] top-0 bottom-40 flex flex-col justify-between text-[10px] font-bold text-slate-400 text-right w-10">
+                                <span>20 顆</span>
+                                <span>15 顆</span>
+                                <span>10 顆</span>
+                                <span>5 顆</span>
+                                <span>0 顆</span>
+                            </div>
 
-                                <!-- Grid lines -->
-                                <div class="absolute inset-0 bottom-8 flex flex-col justify-between pointer-events-none opacity-20 pr-4">
-                                    <div class="border-b border-slate-400 w-full h-0"></div>
-                                    <div class="border-b border-slate-400 w-full h-0"></div>
-                                    <div class="border-b border-slate-400 w-full h-0"></div>
-                                    <div class="border-b border-slate-400 w-full h-0"></div>
-                                    <div class="border-b border-slate-400 w-full h-0"></div>
-                                </div>
+                            <!-- Grid lines aligned with bottom-40 -->
+                            <div class="absolute inset-0 bottom-40 flex flex-col justify-between pointer-events-none opacity-20 pr-4">
+                                <div class="border-b border-slate-400 w-full h-0"></div>
+                                <div class="border-b border-slate-400 w-full h-0"></div>
+                                <div class="border-b border-slate-400 w-full h-0"></div>
+                                <div class="border-b border-slate-400 w-full h-0"></div>
+                                <div class="border-b border-slate-400 w-full h-0"></div>
+                            </div>
 
-                                <!-- Bars wrapper -->
-                                <div id="chart-bars" class="w-full h-full flex justify-around items-end relative z-10 pr-4">
-                                    <!-- Dynamic Bars -->
+                            <!-- Bars wrapper -->
+                            <div id="chart-bars" class="w-full h-full flex justify-around items-end relative z-10 pr-4">
+                                <div class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 font-bold text-sm">
+                                    <p class="text-3xl mb-2">📊</p>
+                                    <p>目前還沒有實驗記錄喔！請前往「第一頁」進行滴水測試。</p>
                                 </div>
                             </div>
                         </div>
@@ -280,24 +244,26 @@
 
             <!-- ================= PAGE 3: CLASS CHART ================= -->
             <div id="tab-class" class="hidden">
-                <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm flex flex-col">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 pb-4 border-b border-slate-100">
+                <div class="bg-white border border-slate-100 rounded-xl p-5 shadow-sm flex flex-col">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-4 pb-3 border-b border-slate-100">
                         <div>
                             <div class="flex items-center gap-2">
-                                <h3 class="font-bold text-xl text-slate-800 flex items-center gap-2">
+                                <h3 class="font-bold text-base sm:text-lg text-slate-800 flex items-center gap-2">
                                     <i class="fa-solid fa-users text-amber-500"></i>
-                                    全班實驗數據棒形圖 (來自 Google Sheet 試算表)
+                                    全班實驗數據棒形圖
                                 </h3>
-                                <button onclick="refreshClassData()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 px-2 py-1 rounded flex items-center gap-1 transition-all">
+                                <button onclick="refreshClassData()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 px-2 py-1 rounded-md flex items-center gap-1 transition-all font-bold">
                                     <i class="fa-solid fa-arrows-rotate"></i> 重新載入數據
                                 </button>
                             </div>
-                            <p class="text-xs text-slate-500 mt-1">
-                                本頁數據直接連結至 Google 試算表並進行大數據運算，呈現全班數據的「纖毛密度區間平均殘留水滴數」。
+                            <p class="text-xs text-slate-500 mt-0.5">
+                                本頁數據統整了全班的雲端大數據，計算出各纖毛區間的平均「殘留水滴數量」。
                             </p>
                         </div>
-                        <div class="text-right flex flex-col items-end">
-                            <span class="text-[11px] font-bold text-slate-400 mb-1">目標同步 Google Sheet：</span>
+                        
+                        <!-- Teacher Sheet link container (Hidden for students, only visible to teacher) -->
+                        <div id="class-sheet-link-container" class="hidden text-right flex flex-col items-end">
+                            <span class="text-[10px] font-bold text-slate-400 mb-0.5">目標同步 Google Sheet：</span>
                             <a href="https://docs.google.com/spreadsheets/d/1TCc4x8HailWMScBvw_hF9YkpDMzzy4qQLfV5FIHTmxY/edit?usp=sharing" target="_blank" class="text-xs font-bold text-blue-600 hover:text-blue-800 underline bg-blue-50 px-2.5 py-1.5 rounded flex items-center gap-1.5 border border-blue-200">
                                 開啟公開試算表 <i class="fa-solid fa-external-link-alt text-[10px]"></i>
                             </a>
@@ -305,23 +271,23 @@
                     </div>
 
                     <!-- Teacher GAS Config (Only visible to teacher) -->
-                    <div id="teacher-gas-panel" class="hidden mb-6 bg-amber-50 border border-amber-200 rounded-xl p-4">
-                        <h4 class="font-bold text-sm text-amber-800 mb-2 flex items-center gap-1.5">
+                    <div id="teacher-gas-panel" class="hidden mb-4 bg-amber-50 border border-amber-200 rounded-xl p-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-amber-800 mb-1.5 flex items-center gap-1.5">
                             <i class="fa-solid fa-gears"></i> 教師管理後台：設定數據上傳路徑 (GAS Web App)
                         </h4>
-                        <p class="text-xs text-amber-700 mb-3">請貼上您部署好的 Google Apps Script 網頁應用程式網址，系統便能自動將學生的實驗紀錄回傳至您的 Google 試算表。</p>
+                        <p class="text-[11px] text-amber-700 mb-2 leading-relaxed">請貼上您部署好的 Google Apps Script 網頁應用程式網址，系統便能自動將學生的實驗紀錄回傳至您的 Google 試算表。</p>
                         <div class="flex gap-2">
-                            <input type="text" id="gas-url-input" placeholder="https://script.google.com/macros/s/.../exec" class="flex-grow bg-white border border-amber-300 rounded-lg px-3 py-2 text-xs font-mono focus:outline-hidden focus:ring-1 focus:ring-amber-500">
-                            <button onclick="saveGasUrl()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-4 py-2 rounded-lg transition-all">
+                            <input type="text" id="gas-url-input" placeholder="https://script.google.com/macros/s/.../exec" class="flex-grow bg-white border border-amber-300 rounded-lg px-3 py-1.5 text-xs font-mono focus:outline-hidden focus:ring-1 focus:ring-amber-500">
+                            <button onclick="saveGasUrl()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-3 py-1.5 rounded-lg transition-all">
                                 儲存設定
                             </button>
                         </div>
                     </div>
 
-                    <!-- Chart Visualizer -->
-                    <div class="h-96 w-full relative flex flex-col justify-end border-b-2 border-l-2 border-slate-300 pb-4 pl-8 pr-4 pt-8 max-w-5xl mx-auto">
-                        <!-- Y Axis labels (0 to 20) -->
-                        <div class="absolute left-[-45px] top-0 bottom-10 flex flex-col justify-between text-[11px] font-bold text-slate-400 text-right w-10">
+                    <!-- Chart Visualizer with pb-40 bottom padding for Class 3x larger droplets and labels -->
+                    <div class="h-[400px] w-full relative flex flex-col justify-end border-b-2 border-l-2 border-slate-300 pb-40 pl-8 pr-4 pt-6 max-w-5xl mx-auto">
+                        <!-- Y Axis labels (0 to 20) with matching bottom bounds (bottom-40) -->
+                        <div class="absolute left-[-45px] top-0 bottom-40 flex flex-col justify-between text-[10px] font-bold text-slate-400 text-right w-10">
                             <span>20 顆</span>
                             <span>15 顆</span>
                             <span>10 顆</span>
@@ -329,8 +295,8 @@
                             <span>0 顆</span>
                         </div>
 
-                        <!-- Grid lines -->
-                        <div class="absolute inset-0 bottom-10 flex flex-col justify-between pointer-events-none opacity-20 pr-4">
+                        <!-- Grid lines aligned with bottom-40 -->
+                        <div class="absolute inset-0 bottom-40 flex flex-col justify-between pointer-events-none opacity-20 pr-4">
                             <div class="border-b border-slate-400 w-full h-0"></div>
                             <div class="border-b border-slate-400 w-full h-0"></div>
                             <div class="border-b border-slate-400 w-full h-0"></div>
@@ -342,16 +308,16 @@
                         <div id="class-chart-bars" class="w-full h-full flex justify-around items-end relative z-10">
                             <!-- Dynamic Class Bars -->
                             <div class="absolute inset-0 flex items-center justify-center bg-white/80 z-20" id="class-chart-loader">
-                                <p class="text-sm font-bold text-slate-500 flex items-center gap-2">
-                                    <i class="fa-solid fa-spinner animate-spin text-emerald-600 text-lg"></i>
+                                <p class="text-xs sm:text-sm font-bold text-slate-500 flex items-center gap-2">
+                                    <i class="fa-solid fa-spinner animate-spin text-emerald-600 text-base"></i>
                                     正在同步讀取 Google Sheet 數據中...
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mt-8 text-center bg-slate-50 p-3 rounded-lg border border-slate-100 max-w-sm mx-auto">
-                        <span class="text-xs font-bold text-slate-500" id="class-sync-status">數據同步狀態：準備中...</span>
+                    <div class="mt-4 text-center bg-slate-50 p-2.5 rounded-lg border border-slate-100 max-w-xs mx-auto shrink-0">
+                        <span class="text-[11px] font-bold text-slate-500" id="class-sync-status">數據同步狀態：準備中...</span>
                     </div>
                 </div>
             </div>
@@ -359,19 +325,19 @@
         </main>
 
         <!-- Footer -->
-        <footer class="bg-slate-800 text-slate-400 text-[11px] py-4 text-center border-t border-slate-700 shrink-0">
-            <p>© 2026 蓮葉效應自然科學模擬教具 - Google Sheet 雲端大數據整合版</p>
+        <footer class="bg-slate-800 text-slate-400 text-[10px] py-2 sm:py-3 text-center border-t border-slate-700 shrink-0">
+            <p>© 2026 蓮葉效應自然科學模擬教具 - 雲端大數據整合版</p>
         </footer>
     </div>
 
     <!-- Custom Alert Popup -->
     <div id="custom-alert" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center z-[100] p-4 transition-all duration-300">
-        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl text-center flex flex-col items-center border border-slate-100">
-            <div id="alert-icon" class="text-4xl mb-3 text-emerald-500">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-5 shadow-xl text-center flex flex-col items-center border border-slate-100 animate-fade-in">
+            <div id="alert-icon" class="text-3xl mb-2.5 text-emerald-500">
                 <i class="fa-solid fa-circle-check"></i>
             </div>
-            <h4 id="alert-title" class="font-bold text-slate-800 text-lg mb-2">標題</h4>
-            <p id="alert-msg" class="text-slate-500 text-sm mb-4">內容訊息</p>
+            <h4 id="alert-title" class="font-bold text-slate-800 text-base mb-1.5">標題</h4>
+            <p id="alert-msg" class="text-slate-500 text-xs sm:text-sm mb-3.5 leading-relaxed">內容訊息</p>
             <button onclick="closeAlert()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-8 rounded-xl text-sm transition-all shadow-sm">
                 確定
             </button>
@@ -388,7 +354,7 @@
         let currentUser = "";
         let isTeacher = false;
         let testCount = 0;
-        let ciliaCount = 100;
+        let ciliaCount = 0; // Initialize with 0
         let canvas, ctx, microCanvas, microCtx;
         let animationFrameId = null;
         let particles = [];
@@ -449,9 +415,9 @@
             const indicator = document.getElementById('sync-indicator');
             if (!indicator) return;
             if (active) {
-                indicator.innerHTML = `<span class="h-2.5 w-2.5 rounded-full bg-emerald-500 inline-block animate-ping"></span> <span class="text-emerald-600 font-bold">雲端連線正常</span>`;
+                indicator.innerHTML = `<span class="h-2 w-2 rounded-full bg-emerald-500 inline-block animate-ping"></span> <span class="text-emerald-600 font-bold">雲端連線正常</span>`;
             } else {
-                indicator.innerHTML = `<span class="h-2.5 w-2.5 rounded-full bg-rose-500 inline-block"></span> <span class="text-rose-500 font-bold">本地暫存模式</span>`;
+                indicator.innerHTML = `<span class="h-2 w-2 rounded-full bg-rose-500 inline-block"></span> <span class="text-rose-500 font-bold">本地暫存模式</span>`;
             }
         }
 
@@ -518,14 +484,16 @@
             const classBtn = document.getElementById('tab-class-btn');
             const classTabStatus = document.getElementById('class-tab-status');
             const userIcon = document.getElementById('user-role-icon');
+            const sheetLinkContainer = document.getElementById('class-sheet-link-container');
 
             if (currentUser.toLowerCase() === 'teacher') {
                 isTeacher = true;
                 userIcon.className = "fa-solid fa-user-tie text-amber-300";
                 
-                // Show teacher setup panel
+                // Show teacher setup panel & link
                 document.getElementById('teacher-gas-panel').classList.remove('hidden');
                 document.getElementById('gas-url-input').value = gasWebAppUrl;
+                if (sheetLinkContainer) sheetLinkContainer.classList.remove('hidden');
 
                 // Unlock Class Tab for teacher immediately
                 classBtn.classList.remove('hidden');
@@ -533,12 +501,13 @@
                 classTabStatus.innerText = "老師通道";
                 classTabStatus.className = "bg-amber-500 text-white text-[10px] px-2 py-0.5 rounded-full ml-1";
                 
-                showAlert("教師祕密入口已啟用", "歡迎老師！您已進入系統後台，可直接查看第三頁的【全班棒形圖】並自訂 API 回傳網址。", "success");
+                showAlert("教師祕密入口已啟用", "歡迎老師！您已進入系統後台，可直接查看第三頁的【全班棒形圖】並自訂 API 回傳網址與瀏覽公開試算表。", "success");
                 window.switchTab('class'); // Auto switch to class chart for teachers
             } else {
                 isTeacher = false;
                 userIcon.className = "fa-solid fa-user-graduate text-emerald-200";
                 document.getElementById('teacher-gas-panel').classList.add('hidden');
+                if (sheetLinkContainer) sheetLinkContainer.classList.add('hidden'); // Hide sheet link for students
                 
                 // Check if student has already completed 5 tests (using cached testCount)
                 if (testCount >= 5) {
@@ -573,6 +542,9 @@
             const progressText = document.getElementById('progress-text');
             if (progressBar) progressBar.style.width = `0%`;
             if (progressText) progressText.innerText = `進度：0 / 5 次`;
+
+            const p2ProgressText = document.getElementById('progress-text-p2');
+            if (p2ProgressText) p2ProgressText.innerText = `測試進度：0 / 5 次`;
 
             updateDataTable();
             renderBarChart();
@@ -720,7 +692,8 @@
                 });
             }
 
-            const exactRemainingPct = Math.max(0, Math.round(100 * Math.exp(-0.00045 * (ciliaCount - 100))));
+            // Exponential decay calculation adapted to start from 0
+            const exactRemainingPct = Math.max(0, Math.round(100 * Math.exp(-0.00045 * ciliaCount)));
             const expectedStuckCount = Math.round((exactRemainingPct / 100) * totalDroplets);
 
             let stuckIndices = [];
@@ -763,20 +736,23 @@
                 ctx.lineCap = 'round';
                 ctx.stroke();
 
-                const density = Math.min(250, Math.floor(ciliaCount / 40));
-                ctx.strokeStyle = '#10b981';
-                ctx.lineWidth = 2.5;
-                for (let i = 0; i <= density; i++) {
-                    const t = i / density;
-                    const cx = (1-t)*startX + t*endX;
-                    const cy = (1-t)*(1-t)*startY + 2*(1-t)*t*((startY + endY)/2 + 30) + t*t*endY;
-                    const angle = Math.atan2(endY - startY, endX - startX) - Math.PI/2;
-                    const ciliaLength = 6 + (Math.sin(i) * 2);
-                    
-                    ctx.beginPath();
-                    ctx.moveTo(cx, cy);
-                    ctx.lineTo(cx + Math.cos(angle) * ciliaLength, cy + Math.sin(angle) * ciliaLength);
-                    ctx.stroke();
+                // Only draw green cilia lines if ciliaCount is greater than 0
+                if (ciliaCount > 0) {
+                    const density = Math.min(250, Math.floor(ciliaCount / 40));
+                    ctx.strokeStyle = '#10b981';
+                    ctx.lineWidth = 2.5;
+                    for (let i = 0; i <= density; i++) {
+                        const t = i / density;
+                        const cx = (1-t)*startX + t*endX;
+                        const cy = (1-t)*(1-t)*startY + 2*(1-t)*t*((startY + endY)/2 + 30) + t*t*endY;
+                        const angle = Math.atan2(endY - startY, endX - startX) - Math.PI/2;
+                        const ciliaLength = 6 + (Math.sin(i) * 2);
+                        
+                        ctx.beginPath();
+                        ctx.moveTo(cx, cy);
+                        ctx.lineTo(cx + Math.cos(angle) * ciliaLength, cy + Math.sin(angle) * ciliaLength);
+                        ctx.stroke();
+                    }
                 }
 
                 let allFinished = true;
@@ -880,7 +856,7 @@
             });
             
             resizeCanvas();
-            updateCiliaValue(100);
+            updateCiliaValue(0); // Initialize with 0
             drawStaticLeaf();
             drawMicroDroplet();
         };
@@ -904,16 +880,18 @@
             microCtx.fillStyle = '#065f46';
             microCtx.fillRect(0, leafY, width, height - leafY);
             
-            const progress = (ciliaCount - 100) / 9900; 
+            const progress = ciliaCount / 10000; // Normalized progression based on 0-10000 range
             
-            // Draw Thick, Bold Micro Cilia Spikes (More visible for observation)
-            const maxSpikesCount = 10 + Math.floor(progress * 30);
-            const spikeWidth = Math.max(3, 8 - (progress * 4)); // Make spikes thicker
-            microCtx.fillStyle = '#10b981';
-            for (let i = 0; i <= maxSpikesCount; i++) {
-                const spikeX = (i / maxSpikesCount) * width;
-                const spikeH = 15 + (Math.sin(i * 1.5) * 6) + (progress * 12); // Taller spikes
-                microCtx.fillRect(spikeX - spikeWidth/2, leafY - spikeH, spikeWidth, spikeH);
+            // Only draw micro-cilia spikes if ciliaCount is greater than 0
+            if (ciliaCount > 0) {
+                const maxSpikesCount = 10 + Math.floor(progress * 30);
+                const spikeWidth = Math.max(3, 8 - (progress * 4)); // Make spikes thicker
+                microCtx.fillStyle = '#10b981';
+                for (let i = 0; i <= maxSpikesCount; i++) {
+                    const spikeX = (i / maxSpikesCount) * width;
+                    const spikeH = 15 + (Math.sin(i * 1.5) * 6) + (progress * 12); // Taller spikes
+                    microCtx.fillRect(spikeX - spikeWidth/2, leafY - spikeH, spikeWidth, spikeH);
+                }
             }
 
             // Draw SIGNIFICANTLY ENLARGED WATER DROPLET (托高與形變更明確)
@@ -923,8 +901,9 @@
             const centerX = width / 2;
             
             // Distance from leaf floor: sitting high on top of tall cilia as progress increases
+            // When progress is 0, water droplet sits directly on the flat green leaf surface
             const restingOffset = 10 + (progress * 26);
-            const centerY = leafY - dy - restingOffset;
+            const centerY = leafY - dy - (ciliaCount > 0 ? restingOffset : 0);
 
             // Generate Water Shading Gradient
             let dropGrad = microCtx.createRadialGradient(centerX - dx/3, centerY - dy/3, 4, centerX, centerY, dx);
@@ -974,19 +953,22 @@
             ctx.lineCap = 'round';
             ctx.stroke();
 
-            const density = Math.min(250, Math.floor(ciliaCount / 40));
-            ctx.strokeStyle = '#10b981';
-            ctx.lineWidth = 2.5;
-            for (let i = 0; i <= density; i++) {
-                const t = i / density;
-                const cx = (1-t)*startX + t*endX;
-                const cy = (1-t)*(1-t)*startY + 2*(1-t)*t*((startY + endY)/2 + 30) + t*t*endY;
-                const angle = Math.atan2(endY - startY, endX - startX) - Math.PI/2;
-                const ciliaLength = 6 + (Math.sin(i) * 2);
-                ctx.beginPath();
-                ctx.moveTo(cx, cy);
-                ctx.lineTo(cx + Math.cos(angle) * ciliaLength, cy + Math.sin(angle) * ciliaLength);
-                ctx.stroke();
+            // Only draw green cilia lines if ciliaCount is greater than 0
+            if (ciliaCount > 0) {
+                const density = Math.min(250, Math.floor(ciliaCount / 40));
+                ctx.strokeStyle = '#10b981';
+                ctx.lineWidth = 2.5;
+                for (let i = 0; i <= density; i++) {
+                    const t = i / density;
+                    const cx = (1-t)*startX + t*endX;
+                    const cy = (1-t)*(1-t)*startY + 2*(1-t)*t*((startY + endY)/2 + 30) + t*t*endY;
+                    const angle = Math.atan2(endY - startY, endX - startX) - Math.PI/2;
+                    const ciliaLength = 6 + (Math.sin(i) * 2);
+                    ctx.beginPath();
+                    ctx.moveTo(cx, cy);
+                    ctx.lineTo(cx + Math.cos(angle) * ciliaLength, cy + Math.sin(angle) * ciliaLength);
+                    ctx.stroke();
+                }
             }
         }
 
@@ -1007,6 +989,12 @@
 
         async function autoRecordData(stuckCount) {
             if (!currentUser) return;
+
+            // 💡 教師防干擾機制：如果當前使用者是教師，則只進行畫面示範與提示，不將數據上載或記錄，避免污染班級數據
+            if (isTeacher) {
+                showAlert("教師示範成功", `本次示範數據：<br><b>纖毛數量</b>: ${ciliaCount.toLocaleString()} 根<br><b>殘留水滴</b>: ${stuckCount} 顆<br><br><span class="text-xs text-amber-600">💡 老師請注意：此為示範模式，數據不會上傳至雲端試算表，以免影響學生的統計。</span>`, "warning");
+                return;
+            }
 
             // Prevent duplicate records for the same student with same density
             const exists = myRecords.some(t => t.cilia === ciliaCount);
@@ -1061,13 +1049,13 @@
                         },
                         body: JSON.stringify(record)
                     });
-                    apiSyncStatus = "<br><span class='text-[11px] text-emerald-600 font-bold'>🟢 數據已成功同步上載至 Google 試算表！</span>";
+                    apiSyncStatus = "<br><span class='text-[11px] text-emerald-600 font-bold'>🟢 數據已成功同步上載雲端資料庫！</span>";
                 } catch (err) {
                     console.error("GAS POST Error:", err);
-                    apiSyncStatus = "<br><span class='text-[11px] text-amber-600 font-bold'>⚠️ 已寫入本地，但 Google Apps Script 連接時遭遇阻礙。</span>";
+                    apiSyncStatus = "<br><span class='text-[11px] text-amber-600 font-bold'>⚠️ 已寫入本地，但雲端連接時遭遇阻礙。</span>";
                 }
             } else {
-                apiSyncStatus = "<br><span class='text-[11px] text-slate-400 font-bold'>ℹ️ 教師未設定 GAS 網址，暫存於雲端與本地端中。</span>";
+                apiSyncStatus = "<br><span class='text-[11px] text-slate-400 font-bold'>ℹ️ 暫存於雲端與本地端中。</span>";
             }
 
             // Update UI components
@@ -1076,10 +1064,9 @@
             
             // Progress Bar Logic (for unlocking Page 3)
             const progressPct = Math.min((testCount / 5) * 100, 100);
-            const progressBar = document.getElementById('progress-bar');
-            const progressText = document.getElementById('progress-text');
-            if (progressBar) progressBar.style.width = `${progressPct}%`;
-            if (progressText) progressText.innerText = `進度：${Math.min(testCount, 5)} / 5 次`;
+            
+            const p2ProgressText = document.getElementById('progress-text-p2');
+            if (p2ProgressText) p2ProgressText.innerText = `測試進度：${Math.min(testCount, 5)} / 5 次`;
 
             let successMessage = `本次數據已自動記錄：<br><b>纖毛數量</b>: ${ciliaCount.toLocaleString()} 根<br><b>殘留水滴</b>: ${stuckCount} 顆${apiSyncStatus}`;
             
@@ -1105,59 +1092,101 @@
         }
 
         function updateDataTable() {
-            const tableContainer = document.getElementById('data-table-container');
-            const emptyState = document.getElementById('empty-table-state');
-            const tableBody = document.getElementById('data-table-body');
-            
-            if (myRecords.length === 0) {
-                tableContainer.classList.add('hidden');
-                emptyState.classList.remove('hidden');
-                return;
-            }
-
-            tableContainer.classList.remove('hidden');
-            emptyState.classList.add('hidden');
-            
-            tableBody.innerHTML = '';
-            myRecords.forEach((trial, index) => {
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50 transition-colors";
-                tr.innerHTML = `
-                    <td class="py-2.5 px-3 text-xs font-bold text-slate-500">第 ${index + 1} 組</td>
-                    <td class="py-2.5 px-3 text-sm font-black text-emerald-600">${trial.cilia.toLocaleString()}</td>
-                    <td class="py-2.5 px-3 text-sm font-black text-blue-600">${trial.waterLeft} 顆</td>
-                `;
-                tableBody.appendChild(tr);
-            });
+            // Keep this function intact in case of background updates, but the physical table DOM has been removed as requested.
         }
 
         // Render Personal Bar Chart with "No Bar for 0" Rule
-        // Modified: X-axis now displays simple indexes (1, 2, 3...) instead of Cilia Count
+        // Displays cleanly from top to bottom (Bar -> Number/Label -> Water Droplet Shape 3x Enlarged)
         function renderBarChart() {
             const chartContainer = document.getElementById('chart-bars');
+            if (!chartContainer) return;
             chartContainer.innerHTML = '';
 
-            myRecords.forEach((trial, index) => {
+            if (myRecords.length === 0) {
+                chartContainer.innerHTML = `
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 font-bold text-sm">
+                        <p class="text-3xl mb-2">📊</p>
+                        <p>目前還沒有實驗記錄喔！請前往「第一頁」進行滴水測試。</p>
+                    </div>
+                `;
+                return;
+            }
+
+            myRecords.forEach((trial) => {
                 const barCol = document.createElement('div');
-                barCol.className = 'flex flex-col items-center justify-end h-full w-12 sm:w-16 group relative';
+                barCol.className = 'flex flex-col items-center justify-end h-full w-12 sm:w-20 group relative';
                 
                 const heightPct = Math.max(0, (trial.waterLeft / 20) * 100);
-                const displayIndex = index + 1; // Group Index ("1, 2, 3...")
+                const displayCilia = trial.cilia.toLocaleString(); // Cilia Count
+
+                // Calculate micro water droplet shape vector for X-axis comparison (3x Scale)
+                const progress = trial.cilia / 10000;
+                const width = 192; // 64 * 3
+                const height = 120; // 40 * 3
+                const leafY = 96; // 32 * 3
+                
+                // Shape deformation logic 3x scaled: flatter when progress is low, rounder/higher when progress is high
+                const rx = 39 + (30 * (1 - progress)); // (13 * 3) + (10 * 3)
+                const ry = 39 - (24 * (1 - progress)); // (13 * 3) - (8 * 3)
+                const restingOffset = 3 + (progress * 15); // (1 * 3) + (5 * 3)
+                const cy = leafY - ry - (trial.cilia > 0 ? restingOffset : 0);
+
+                // Build HTML SVG inline template for the droplet shape (3x Scaled)
+                const dropletSvg = `
+                  <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" class="mt-1 drop-shadow-sm">
+                    <!-- Leaf segment line (3x thicker) -->
+                    <line x1="6" y1="${leafY}" x2="${width-6}" y2="${leafY}" stroke="#047857" stroke-width="7.5" stroke-linecap="round" />
+                    <!-- Micro cilia hairs (3x thicker and longer) -->
+                    ${trial.cilia > 0 ? `
+                      <line x1="60" y1="${leafY}" x2="60" y2="${leafY - 12}" stroke="#10b981" stroke-width="4.5" />
+                      <line x1="78" y1="${leafY}" x2="78" y2="${leafY - 15}" stroke="#10b981" stroke-width="4.5" />
+                      <line x1="96" y1="${leafY}" x2="96" y2="${leafY - 12}" stroke="#10b981" stroke-width="4.5" />
+                      <line x1="114" y1="${leafY}" x2="114" y2="${leafY - 15}" stroke="#10b981" stroke-width="4.5" />
+                      <line x1="132" y1="${leafY}" x2="132" y2="${leafY - 12}" stroke="#10b981" stroke-width="4.5" />
+                    ` : ''}
+                    <!-- Droplet ellipse (3x size) -->
+                    <ellipse cx="${width/2}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#p2-drop-grad-${trial.cilia})" stroke="#0284c7" stroke-width="1.5" />
+                    <!-- Highlight specular spot (3x size) -->
+                    <ellipse cx="${width/2 - rx*0.35}" cy="${cy - ry*0.3}" rx="${rx*0.25}" ry="${ry*0.2}" fill="rgba(255, 255, 255, 0.85)" />
+                    
+                    <defs>
+                      <radialGradient id="p2-drop-grad-${trial.cilia}" cx="35%" cy="35%" r="65%">
+                        <stop offset="0%" stop-color="#bae6fd" />
+                        <stop offset="60%" stop-color="#38bdf8" />
+                        <stop offset="100%" stop-color="#0284c7" />
+                      </radialGradient>
+                    </defs>
+                  </svg>
+                `;
 
                 if (trial.waterLeft === 0) {
                     barCol.innerHTML = `
-                        <div class="absolute bottom-2 font-black text-sm text-slate-400 h-6 flex items-center justify-center">0</div>
-                        <div class="text-[10px] font-black text-slate-500 mt-2 text-center absolute -bottom-6 w-full truncate" title="纖毛數量: ${trial.cilia} 根">${displayIndex}</div>
+                        <!-- Number 0 label at bottom of chart axis -->
+                        <div class="absolute bottom-2 font-black text-sm text-slate-400 h-6 flex items-center justify-center animate-fade-in">0</div>
+                        
+                        <!-- Labels & Shapes Container stacked below the baseline (top-[100%] naturally pushes it below) -->
+                        <div class="absolute top-[100%] pt-2 w-full flex flex-col items-center">
+                            <div class="text-[10px] font-black text-slate-500 truncate" title="纖毛數量: ${trial.cilia} 根">${displayCilia}</div>
+                            <div class="mt-1">${dropletSvg}</div>
+                        </div>
                     `;
                 } else {
                     barCol.innerHTML = `
+                        <!-- Hover Tooltip -->
                         <div class="absolute top-[-30px] bg-slate-800 text-white text-[10px] py-1 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 shadow-sm whitespace-nowrap font-bold">
-                            第 ${displayIndex} 組 | 纖毛數: ${trial.cilia.toLocaleString()} | 殘留 ${trial.waterLeft} 顆
+                            纖毛數: ${trial.cilia.toLocaleString()} | 殘留 ${trial.waterLeft} 顆
                         </div>
-                        <div class="w-8 sm:w-10 bg-gradient-to-t from-emerald-600 to-teal-400 rounded-t-md transition-all duration-700 flex items-start justify-center pt-1 shadow-xs" style="height: ${heightPct}%">
+                        
+                        <!-- Colored Bar -->
+                        <div class="w-8 sm:w-10 bg-gradient-to-t from-emerald-600 to-teal-400 rounded-t-md transition-all duration-700 flex items-start justify-center pt-1 shadow-xs animate-fade-in" style="height: ${heightPct}%">
                             <span class="text-[9px] text-white font-extrabold">${trial.waterLeft}</span>
                         </div>
-                        <div class="text-[10px] font-black text-slate-500 mt-2 text-center absolute -bottom-6 w-full truncate" title="纖毛數量: ${trial.cilia} 根">${displayIndex}</div>
+                        
+                        <!-- Labels & Shapes Container stacked below the baseline (top-[100%] naturally pushes it below) -->
+                        <div class="absolute top-[100%] pt-2 w-full flex flex-col items-center">
+                            <div class="text-[10px] font-black text-slate-500 truncate" title="纖毛數量: ${trial.cilia} 根">${displayCilia}</div>
+                            <div class="mt-1">${dropletSvg}</div>
+                        </div>
                     `;
                 }
                 chartContainer.appendChild(barCol);
@@ -1165,6 +1194,7 @@
         }
 
         // Render Class Bar Chart from Google Sheets Data with "No Bar for 0" Rule
+        // Displays cleanly from top to bottom (Bar -> Range Label -> Water Droplet Shape 3x Enlarged)
         function renderClassChart() {
             const chartContainer = document.getElementById('class-chart-bars');
             if(!chartContainer) return;
@@ -1174,9 +1204,9 @@
             chartContainer.innerHTML = '';
             if (loader) chartContainer.appendChild(loader);
 
-            // Define 5 scientific density intervals for X-axis comparison
+            // Define 5 scientific density intervals for X-axis comparison (Starting from 0)
             const ranges = [
-                { label: '100 - 2,000', min: 100, max: 2000 },
+                { label: '0 - 2,000', min: 0, max: 2000 },
                 { label: '2,100 - 4,000', min: 2100, max: 4000 },
                 { label: '4,100 - 6,000', min: 4100, max: 6000 },
                 { label: '6,100 - 8,000', min: 6100, max: 8000 },
@@ -1190,26 +1220,81 @@
                 return { label: range.label, avg: parseFloat((sum / matching.length).toFixed(1)), count: matching.length };
             });
 
-            classDataAvg.forEach(data => {
+            classDataAvg.forEach((data, rangeIdx) => {
                 const barCol = document.createElement('div');
                 barCol.className = 'flex flex-col items-center justify-end h-full w-14 sm:w-28 group relative';
                 
                 const heightPct = Math.max(0, (data.avg / 20) * 100);
 
+                // Calculate micro water droplet shape vector for X-axis comparison (0 to 1.0 progress, 3x Scaled)
+                const progress = rangeIdx / 4; // 0, 0.25, 0.5, 0.75, 1.0
+                const width = 192; // 64 * 3
+                const height = 120; // 40 * 3
+                const leafY = 96; // 32 * 3
+                
+                // Shape deformation logic 3x scaled: flatter on low cilia levels, rounder/higher on high cilia levels
+                const rx = 39 + (30 * (1 - progress));
+                const ry = 39 - (24 * (1 - progress));
+                const restingOffset = 3 + (progress * 15);
+                const cy = leafY - ry - (progress > 0 ? restingOffset : 0);
+
+                // Build HTML SVG inline template for the droplet shape (3x Scaled)
+                const hasCilia = progress > 0;
+                const dropletSvg = `
+                  <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" class="mt-1 drop-shadow-sm">
+                    <!-- Leaf segment line (3x thicker) -->
+                    <line x1="6" y1="${leafY}" x2="${width-6}" y2="${leafY}" stroke="#047857" stroke-width="7.5" stroke-linecap="round" />
+                    <!-- Micro cilia hairs (3x thicker and longer) -->
+                    ${hasCilia ? `
+                      <line x1="60" y1="${leafY}" x2="60" y2="${leafY - 12}" stroke="#10b981" stroke-width="4.5" />
+                      <line x1="78" y1="${leafY}" x2="78" y2="${leafY - 15}" stroke="#10b981" stroke-width="4.5" />
+                      <line x1="96" y1="${leafY}" x2="96" y2="${leafY - 12}" stroke="#10b981" stroke-width="4.5" />
+                      <line x1="114" y1="${leafY}" x2="114" y2="${leafY - 15}" stroke="#10b981" stroke-width="4.5" />
+                      <line x1="132" y1="${leafY}" x2="132" y2="${leafY - 12}" stroke="#10b981" stroke-width="4.5" />
+                    ` : ''}
+                    <!-- Droplet ellipse (3x size) -->
+                    <ellipse cx="${width/2}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#class-drop-grad-${rangeIdx})" stroke="#0284c7" stroke-width="1.5" />
+                    <!-- Highlight specular spot (3x size) -->
+                    <ellipse cx="${width/2 - rx*0.35}" cy="${cy - ry*0.3}" rx="${rx*0.25}" ry="${ry*0.2}" fill="rgba(255, 255, 255, 0.85)" />
+                    
+                    <defs>
+                      <radialGradient id="class-drop-grad-${rangeIdx}" cx="35%" cy="35%" r="65%">
+                        <stop offset="0%" stop-color="#bae6fd" />
+                        <stop offset="60%" stop-color="#38bdf8" />
+                        <stop offset="100%" stop-color="#0284c7" />
+                      </radialGradient>
+                    </defs>
+                  </svg>
+                `;
+
                 if (data.avg === 0) {
                     barCol.innerHTML = `
+                        <!-- Number 0 label at bottom of chart axis -->
                         <div class="absolute bottom-2 font-black text-base text-slate-400 h-6 flex items-center justify-center">0</div>
-                        <div class="text-[10px] sm:text-xs font-black text-slate-600 mt-2 text-center absolute -bottom-8 w-full">${data.label}</div>
+                        
+                        <!-- Labels & Shapes Container stacked below the baseline (top-[100%] naturally pushes it below) -->
+                        <div class="absolute top-[100%] pt-2 w-full flex flex-col items-center">
+                            <div class="text-[10px] sm:text-xs font-black text-slate-600 text-center whitespace-nowrap">${data.label}</div>
+                            <div class="mt-1">${dropletSvg}</div>
+                        </div>
                     `;
                 } else {
                     barCol.innerHTML = `
+                        <!-- Hover Tooltip -->
                         <div class="absolute top-[-40px] bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 shadow-sm whitespace-nowrap font-bold">
                             樣本數: ${data.count} 筆實驗
                         </div>
-                        <div class="w-10 sm:w-16 bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-lg transition-all duration-700 flex justify-center shadow-sm relative" style="height: ${heightPct}%">
+                        
+                        <!-- Colored Bar -->
+                        <div class="w-10 sm:w-16 bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-lg transition-all duration-700 flex justify-center shadow-sm relative animate-fade-in" style="height: ${heightPct}%">
                             <span class="absolute -top-6 text-[10px] sm:text-[11px] text-slate-700 font-extrabold">${data.avg} 顆</span>
                         </div>
-                        <div class="text-[10px] sm:text-xs font-black text-slate-600 mt-2 text-center absolute -bottom-8 w-full">${data.label}</div>
+                        
+                        <!-- Labels & Shapes Container stacked below the baseline (top-[100%] naturally pushes it below) -->
+                        <div class="absolute top-[100%] pt-2 w-full flex flex-col items-center">
+                            <div class="text-[10px] sm:text-xs font-black text-slate-600 text-center whitespace-nowrap">${data.label}</div>
+                            <div class="mt-1">${dropletSvg}</div>
+                        </div>
                     `;
                 }
                 chartContainer.appendChild(barCol);
@@ -1235,5 +1320,4 @@
         }
     </script>
 </body>
-</html>
 </html>
