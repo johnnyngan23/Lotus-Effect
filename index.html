@@ -164,7 +164,7 @@
                             <canvas id="simCanvas" class="w-full h-full block"></canvas>
                             
                             <div class="absolute top-2 left-1/2 transform -translate-x-1/2 bg-blue-500/90 text-white px-2.5 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-1 shadow">
-                                <i class="fa-solid fa-cloud-showers-heavy"></i> 降水測試源 (共 20 顆水滴)
+                                <i class="fa-solid fa-cloud-showers-heavy"></i> 降水測試源 (共 20 毫升水量)
                             </div>
 
                             <div id="canvas-overlay" class="absolute inset-0 bg-slate-950/50 flex flex-col justify-center items-center text-white p-6 text-center transition-all duration-300">
@@ -177,14 +177,14 @@
                         </div>
                     </div>
 
-                    <!-- Single Stat Panel for Remaining Droplets -->
+                    <!-- Single Stat Panel for Remaining Water in ml -->
                     <div class="bg-white border border-slate-100 rounded-xl p-3 shadow-sm text-center flex flex-col justify-center items-center shrink-0 min-h-[110px]">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1"><i class="fa-solid fa-droplet text-blue-400"></i> 葉面殘留水滴數量</span>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1"><i class="fa-solid fa-droplet text-blue-400"></i> 葉面水滴餘下</span>
                         <div class="my-0.5">
                             <span id="stat-remain-count" class="text-5xl font-black text-slate-700">--</span>
-                            <span class="text-lg font-bold text-slate-400"> 顆</span>
+                            <span class="text-lg font-bold text-slate-400"> 毫升</span>
                         </div>
-                        <span id="stat-remain-desc" class="text-[11px] text-slate-500 font-bold">（總降水共 20 顆）</span>
+                        <span id="stat-remain-desc" class="text-[11px] text-slate-500 font-bold">（總降水量共 20 毫升）</span>
                     </div>
 
                 </div>
@@ -200,7 +200,7 @@
                                     <i class="fa-solid fa-chart-column text-emerald-600"></i>
                                     個人數據棒形圖與微觀水滴對照
                                 </h3>
-                                <p class="text-xs text-slate-500 mt-0.5">橫軸：纖毛數量（根）與對應水滴形變 | 縱軸：殘留水滴數量（顆）</p>
+                                <p class="text-xs text-slate-500 mt-0.5">橫軸：纖毛數量（根）與對應水滴形變 | 縱軸：水滴餘下（毫升）</p>
                             </div>
                             <div class="flex items-center gap-3">
                                 <span id="progress-text-p2" class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">測試進度：0 / 5 次</span>
@@ -210,15 +210,15 @@
                             </div>
                         </div>
 
-                        <!-- Spacious Full-Width Chart Area with extra bottom padding for SVGs (pb changed to pb-40 for 3x larger water drops) -->
+                        <!-- Spacious Full-Width Chart Area with extra bottom padding for SVGs (pb-40 for 3x larger water drops) -->
                         <div class="h-[420px] w-full relative flex flex-col justify-end border-b-2 border-l-2 border-slate-300 pb-40 pl-6 pt-6 mt-6 max-w-5xl mx-auto">
-                            <!-- Y Axis labels (0 to 20) with matching bottom bounds (bottom-40) -->
+                            <!-- Y Axis labels (0 to 20 毫升) with matching bottom bounds (bottom-40) -->
                             <div class="absolute left-[-45px] top-0 bottom-40 flex flex-col justify-between text-[10px] font-bold text-slate-400 text-right w-10">
-                                <span>20 顆</span>
-                                <span>15 顆</span>
-                                <span>10 顆</span>
-                                <span>5 顆</span>
-                                <span>0 顆</span>
+                                <span>20 毫升</span>
+                                <span>15 毫升</span>
+                                <span>10 毫升</span>
+                                <span>5 毫升</span>
+                                <span>0 毫升</span>
                             </div>
 
                             <!-- Grid lines aligned with bottom-40 -->
@@ -257,7 +257,7 @@
                                 </button>
                             </div>
                             <p class="text-xs text-slate-500 mt-0.5">
-                                本頁數據統整了全班的雲端大數據，計算出各纖毛區間的平均「殘留水滴數量」。
+                                本頁數據統整了全班的雲端大數據，計算出各纖毛區間的平均「水滴餘下（毫升）」。
                             </p>
                         </div>
                         
@@ -286,13 +286,13 @@
 
                     <!-- Chart Visualizer with pb-40 bottom padding for Class 3x larger droplets and labels -->
                     <div class="h-[400px] w-full relative flex flex-col justify-end border-b-2 border-l-2 border-slate-300 pb-40 pl-8 pr-4 pt-6 max-w-5xl mx-auto">
-                        <!-- Y Axis labels (0 to 20) with matching bottom bounds (bottom-40) -->
+                        <!-- Y Axis labels (0 to 20 毫升) with matching bottom bounds (bottom-40) -->
                         <div class="absolute left-[-45px] top-0 bottom-40 flex flex-col justify-between text-[10px] font-bold text-slate-400 text-right w-10">
-                            <span>20 顆</span>
-                            <span>15 顆</span>
-                            <span>10 顆</span>
-                            <span>5 顆</span>
-                            <span>0 顆</span>
+                            <span>20 毫升</span>
+                            <span>15 毫升</span>
+                            <span>10 毫升</span>
+                            <span>5 毫升</span>
+                            <span>0 毫升</span>
                         </div>
 
                         <!-- Grid lines aligned with bottom-40 -->
@@ -326,7 +326,7 @@
 
         <!-- Footer -->
         <footer class="bg-slate-800 text-slate-400 text-[10px] py-2 sm:py-3 text-center border-t border-slate-700 shrink-0">
-            <p>© 2026 蓮葉效應自然科學模擬教具 - 雲端大數據整合版</p>
+            <p>© 2026 蓮葉效應自然科學模擬教具 - Google Sheet 雲端大數據整合版</p>
         </footer>
     </div>
 
@@ -359,7 +359,7 @@
         let animationFrameId = null;
         let particles = [];
         let simulationRunning = false;
-        const totalDroplets = 20;
+        const totalDroplets = 20; // Maps directly to 20ml water
 
         let myRecords = []; // Student's local test records
         let classRecords = []; // Combined Google Sheet records
@@ -980,7 +980,7 @@
             document.getElementById('sim-badge').innerText = '測試完成';
             document.getElementById('sim-badge').className = 'px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded text-xs font-bold';
 
-            // Show count with animation
+            // Show count with animation (Since 1 droplet = 1 ml, stuckCount represents remaining ml)
             animateNumber('stat-remain-count', 0, stuckCount, 600);
 
             // Automatically record data & Sync to Google Sheet!
@@ -990,44 +990,41 @@
         async function autoRecordData(stuckCount) {
             if (!currentUser) return;
 
-            // 💡 教師防干擾機制：如果當前使用者是教師，則只進行畫面示範與提示，不將數據上載或記錄，避免污染班級數據
+            // 💡 教師防干擾機制
             if (isTeacher) {
-                showAlert("教師示範成功", `本次示範數據：<br><b>纖毛數量</b>: ${ciliaCount.toLocaleString()} 根<br><b>殘留水滴</b>: ${stuckCount} 顆<br><br><span class="text-xs text-amber-600">💡 老師請注意：此為示範模式，數據不會上傳至雲端試算表，以免影響學生的統計。</span>`, "warning");
+                showAlert("教師示範成功", `本次示範數據：<br><b>纖毛數量</b>: ${ciliaCount.toLocaleString()} 根<br><b>餘下水量</b>: ${stuckCount} 毫升<br><br><span class="text-xs text-amber-600">💡 老師請注意：此為示範模式，數據不會上傳至雲端試算表，以免影響學生的統計。</span>`, "warning");
                 return;
             }
 
-            // Prevent duplicate records for the same student with same density
             const exists = myRecords.some(t => t.cilia === ciliaCount);
             if (exists) {
                 showAlert("提示", "你已經測量並記錄過此纖毛密度囉，請調整控制桿測試其他密度吧！", "warning");
                 return;
             }
 
-            // Time string formatting in Taipei time zone
             const nowTime = new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
             
             const record = {
                 timestamp: nowTime,
                 studentId: currentUser,
                 ciliaCount: ciliaCount,
-                remainingCount: stuckCount
+                remainingCount: stuckCount // Sent to GAS script as remainingCount, which maps to ml
             };
 
-            // 1. Save to Student's Local State
+            // Save to Student's Local State
             myRecords.push({
                 id: myRecords.length + 1,
                 cilia: ciliaCount,
-                waterLeft: stuckCount,
+                waterLeft: stuckCount, // Representing ml
                 time: nowTime
             });
             myRecords.sort((a, b) => a.cilia - b.cilia);
 
-            // Update local test count based on unique tests
             if (!isTeacher) {
                 testCount = myRecords.length;
             }
 
-            // 2. Upload to Firebase (Realtime backup database)
+            // Upload to Firebase Backup
             if (db && authInstance?.currentUser) {
                 try {
                     const publicCollectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'experiments');
@@ -1037,13 +1034,13 @@
                 }
             }
 
-            // 3. Upload to Google Sheets via Apps Script Web App (API)
+            // Upload to Google Sheets via Apps Script Web App (API)
             let apiSyncStatus = "";
             if (gasWebAppUrl) {
                 try {
-                    const postResponse = await fetch(gasWebAppUrl, {
+                    await fetch(gasWebAppUrl, {
                         method: 'POST',
-                        mode: 'no-cors', // standard workaround for typical Apps Script web app posts
+                        mode: 'no-cors',
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -1058,19 +1055,16 @@
                 apiSyncStatus = "<br><span class='text-[11px] text-slate-400 font-bold'>ℹ️ 暫存於雲端與本地端中。</span>";
             }
 
-            // Update UI components
             updateDataTable();
             renderBarChart();
             
-            // Progress Bar Logic (for unlocking Page 3)
             const progressPct = Math.min((testCount / 5) * 100, 100);
             
             const p2ProgressText = document.getElementById('progress-text-p2');
             if (p2ProgressText) p2ProgressText.innerText = `測試進度：${Math.min(testCount, 5)} / 5 次`;
 
-            let successMessage = `本次數據已自動記錄：<br><b>纖毛數量</b>: ${ciliaCount.toLocaleString()} 根<br><b>殘留水滴</b>: ${stuckCount} 顆${apiSyncStatus}`;
+            let successMessage = `本次數據已自動記錄：<br><b>纖毛數量</b>: ${ciliaCount.toLocaleString()} 根<br><b>餘下水量</b>: ${stuckCount} 毫升${apiSyncStatus}`;
             
-            // Handle Tab 3 unlock mechanism
             if (!isTeacher && testCount === 5) {
                 successMessage += "<br><br>🎉 <b>恭喜！</b>您已完成 5 組不同纖毛密度的測試，現已解鎖【第三頁：全班棒形圖】！趕快去分析全班的大數據規律吧！";
                 
@@ -1085,18 +1079,17 @@
 
             showAlert("數據自動記錄成功", successMessage, "success");
 
-            // Auto trigger a background fetch to get latest sheet visualization
             setTimeout(() => {
                 refreshClassData();
             }, 1500);
         }
 
         function updateDataTable() {
-            // Keep this function intact in case of background updates, but the physical table DOM has been removed as requested.
+            // Keep table logic for database synchronization fallback, DOM rendering removed
         }
 
         // Render Personal Bar Chart with "No Bar for 0" Rule
-        // Displays cleanly from top to bottom (Bar -> Number/Label -> Water Droplet Shape 3x Enlarged)
+        // Modified: Displays cleanly from top to bottom (Bar -> Number/Label -> Water Droplet Shape 3x Enlarged with ml unit)
         function renderBarChart() {
             const chartContainer = document.getElementById('chart-bars');
             if (!chartContainer) return;
@@ -1126,17 +1119,16 @@
                 const leafY = 96; // 32 * 3
                 
                 // Shape deformation logic 3x scaled: flatter when progress is low, rounder/higher when progress is high
-                const rx = 39 + (30 * (1 - progress)); // (13 * 3) + (10 * 3)
-                const ry = 39 - (24 * (1 - progress)); // (13 * 3) - (8 * 3)
-                const restingOffset = 3 + (progress * 15); // (1 * 3) + (5 * 3)
+                const rx = 39 + (30 * (1 - progress));
+                const ry = 39 - (24 * (1 - progress));
+                const restingOffset = 3 + (progress * 15);
                 const cy = leafY - ry - (trial.cilia > 0 ? restingOffset : 0);
 
-                // Build HTML SVG inline template for the droplet shape (3x Scaled)
                 const dropletSvg = `
                   <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" class="mt-1 drop-shadow-sm">
-                    <!-- Leaf segment line (3x thicker) -->
+                    <!-- Leaf segment line -->
                     <line x1="6" y1="${leafY}" x2="${width-6}" y2="${leafY}" stroke="#047857" stroke-width="7.5" stroke-linecap="round" />
-                    <!-- Micro cilia hairs (3x thicker and longer) -->
+                    <!-- Micro cilia hairs -->
                     ${trial.cilia > 0 ? `
                       <line x1="60" y1="${leafY}" x2="60" y2="${leafY - 12}" stroke="#10b981" stroke-width="4.5" />
                       <line x1="78" y1="${leafY}" x2="78" y2="${leafY - 15}" stroke="#10b981" stroke-width="4.5" />
@@ -1144,9 +1136,9 @@
                       <line x1="114" y1="${leafY}" x2="114" y2="${leafY - 15}" stroke="#10b981" stroke-width="4.5" />
                       <line x1="132" y1="${leafY}" x2="132" y2="${leafY - 12}" stroke="#10b981" stroke-width="4.5" />
                     ` : ''}
-                    <!-- Droplet ellipse (3x size) -->
+                    <!-- Droplet ellipse -->
                     <ellipse cx="${width/2}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#p2-drop-grad-${trial.cilia})" stroke="#0284c7" stroke-width="1.5" />
-                    <!-- Highlight specular spot (3x size) -->
+                    <!-- Highlight specular spot -->
                     <ellipse cx="${width/2 - rx*0.35}" cy="${cy - ry*0.3}" rx="${rx*0.25}" ry="${ry*0.2}" fill="rgba(255, 255, 255, 0.85)" />
                     
                     <defs>
@@ -1164,7 +1156,7 @@
                         <!-- Number 0 label at bottom of chart axis -->
                         <div class="absolute bottom-2 font-black text-sm text-slate-400 h-6 flex items-center justify-center animate-fade-in">0</div>
                         
-                        <!-- Labels & Shapes Container stacked below the baseline (top-[100%] naturally pushes it below) -->
+                        <!-- Labels & Shapes Container stacked below the baseline -->
                         <div class="absolute top-[100%] pt-2 w-full flex flex-col items-center">
                             <div class="text-[10px] font-black text-slate-500 truncate" title="纖毛數量: ${trial.cilia} 根">${displayCilia}</div>
                             <div class="mt-1">${dropletSvg}</div>
@@ -1174,7 +1166,7 @@
                     barCol.innerHTML = `
                         <!-- Hover Tooltip -->
                         <div class="absolute top-[-30px] bg-slate-800 text-white text-[10px] py-1 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 shadow-sm whitespace-nowrap font-bold">
-                            纖毛數: ${trial.cilia.toLocaleString()} | 殘留 ${trial.waterLeft} 顆
+                            纖毛數: ${trial.cilia.toLocaleString()} | 餘下 ${trial.waterLeft} 毫升
                         </div>
                         
                         <!-- Colored Bar -->
@@ -1182,7 +1174,7 @@
                             <span class="text-[9px] text-white font-extrabold">${trial.waterLeft}</span>
                         </div>
                         
-                        <!-- Labels & Shapes Container stacked below the baseline (top-[100%] naturally pushes it below) -->
+                        <!-- Labels & Shapes Container stacked below the baseline -->
                         <div class="absolute top-[100%] pt-2 w-full flex flex-col items-center">
                             <div class="text-[10px] font-black text-slate-500 truncate" title="纖毛數量: ${trial.cilia} 根">${displayCilia}</div>
                             <div class="mt-1">${dropletSvg}</div>
@@ -1194,17 +1186,15 @@
         }
 
         // Render Class Bar Chart from Google Sheets Data with "No Bar for 0" Rule
-        // Displays cleanly from top to bottom (Bar -> Range Label -> Water Droplet Shape 3x Enlarged)
+        // Displays cleanly from top to bottom (Bar -> Range Label -> Water Droplet Shape 3x Enlarged with ml unit)
         function renderClassChart() {
             const chartContainer = document.getElementById('class-chart-bars');
             if(!chartContainer) return;
             
-            // Keep loader aside
             const loader = document.getElementById('class-chart-loader');
             chartContainer.innerHTML = '';
             if (loader) chartContainer.appendChild(loader);
 
-            // Define 5 scientific density intervals for X-axis comparison (Starting from 0)
             const ranges = [
                 { label: '0 - 2,000', min: 0, max: 2000 },
                 { label: '2,100 - 4,000', min: 2100, max: 4000 },
@@ -1232,19 +1222,17 @@
                 const height = 120; // 40 * 3
                 const leafY = 96; // 32 * 3
                 
-                // Shape deformation logic 3x scaled: flatter on low cilia levels, rounder/higher on high cilia levels
                 const rx = 39 + (30 * (1 - progress));
                 const ry = 39 - (24 * (1 - progress));
                 const restingOffset = 3 + (progress * 15);
                 const cy = leafY - ry - (progress > 0 ? restingOffset : 0);
 
-                // Build HTML SVG inline template for the droplet shape (3x Scaled)
                 const hasCilia = progress > 0;
                 const dropletSvg = `
                   <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" class="mt-1 drop-shadow-sm">
-                    <!-- Leaf segment line (3x thicker) -->
+                    <!-- Leaf segment line -->
                     <line x1="6" y1="${leafY}" x2="${width-6}" y2="${leafY}" stroke="#047857" stroke-width="7.5" stroke-linecap="round" />
-                    <!-- Micro cilia hairs (3x thicker and longer) -->
+                    <!-- Micro cilia hairs -->
                     ${hasCilia ? `
                       <line x1="60" y1="${leafY}" x2="60" y2="${leafY - 12}" stroke="#10b981" stroke-width="4.5" />
                       <line x1="78" y1="${leafY}" x2="78" y2="${leafY - 15}" stroke="#10b981" stroke-width="4.5" />
@@ -1252,9 +1240,9 @@
                       <line x1="114" y1="${leafY}" x2="114" y2="${leafY - 15}" stroke="#10b981" stroke-width="4.5" />
                       <line x1="132" y1="${leafY}" x2="132" y2="${leafY - 12}" stroke="#10b981" stroke-width="4.5" />
                     ` : ''}
-                    <!-- Droplet ellipse (3x size) -->
+                    <!-- Droplet ellipse -->
                     <ellipse cx="${width/2}" cy="${cy}" rx="${rx}" ry="${ry}" fill="url(#class-drop-grad-${rangeIdx})" stroke="#0284c7" stroke-width="1.5" />
-                    <!-- Highlight specular spot (3x size) -->
+                    <!-- Highlight specular spot -->
                     <ellipse cx="${width/2 - rx*0.35}" cy="${cy - ry*0.3}" rx="${rx*0.25}" ry="${ry*0.2}" fill="rgba(255, 255, 255, 0.85)" />
                     
                     <defs>
@@ -1272,7 +1260,7 @@
                         <!-- Number 0 label at bottom of chart axis -->
                         <div class="absolute bottom-2 font-black text-base text-slate-400 h-6 flex items-center justify-center">0</div>
                         
-                        <!-- Labels & Shapes Container stacked below the baseline (top-[100%] naturally pushes it below) -->
+                        <!-- Labels & Shapes Container stacked below the baseline -->
                         <div class="absolute top-[100%] pt-2 w-full flex flex-col items-center">
                             <div class="text-[10px] sm:text-xs font-black text-slate-600 text-center whitespace-nowrap">${data.label}</div>
                             <div class="mt-1">${dropletSvg}</div>
@@ -1287,10 +1275,10 @@
                         
                         <!-- Colored Bar -->
                         <div class="w-10 sm:w-16 bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-lg transition-all duration-700 flex justify-center shadow-sm relative animate-fade-in" style="height: ${heightPct}%">
-                            <span class="absolute -top-6 text-[10px] sm:text-[11px] text-slate-700 font-extrabold">${data.avg} 顆</span>
+                            <span class="absolute -top-6 text-[10px] sm:text-[11px] text-slate-700 font-extrabold">${data.avg} 毫量</span>
                         </div>
                         
-                        <!-- Labels & Shapes Container stacked below the baseline (top-[100%] naturally pushes it below) -->
+                        <!-- Labels & Shapes Container stacked below the baseline -->
                         <div class="absolute top-[100%] pt-2 w-full flex flex-col items-center">
                             <div class="text-[10px] sm:text-xs font-black text-slate-600 text-center whitespace-nowrap">${data.label}</div>
                             <div class="mt-1">${dropletSvg}</div>
