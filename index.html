@@ -192,51 +192,45 @@
 
             <!-- ================= PAGE 2: CHARTS & DATA (Personal) ================= -->
             <div id="tab-chart" class="hidden">
-                <div class="w-full bg-white border border-slate-100 rounded-xl p-6 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
-                            <div>
-                                <h3 class="font-bold text-lg text-slate-800 flex items-center gap-2">
-                                    <i class="fa-solid fa-chart-column text-emerald-600"></i>
-                                    個人數據棒形圖與微觀水滴對照
-                                </h3>
-                                <p class="text-xs text-slate-500 mt-0.5">橫軸：纖毛數量（根）與對應水滴形變 | 縱軸：水滴餘下（毫升）</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span id="progress-text-p2" class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">測試進度：0 / 5 次</span>
-                                <span class="px-2.5 py-1 bg-amber-50 text-amber-700 font-bold text-[10px] rounded-full border border-amber-200">
-                                    規則：0 的數棒不顯示，僅標示數字
-                                </span>
+                <div class="w-full bg-white border border-slate-100 rounded-xl p-6 shadow-sm flex flex-col">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-6">
+                        <div>
+                            <h3 class="font-bold text-lg text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-chart-column text-emerald-600"></i>
+                                個人數據棒形圖與微觀水滴對照
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-0.5">縱軸：纖毛數量（根，由小至大） | 橫軸：水滴餘下（毫升）與最右側微觀水滴狀態</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span id="progress-text-p2" class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">測試進度：0 / 5 次</span>
+                            <span class="px-2.5 py-1 bg-amber-50 text-amber-700 font-bold text-[10px] rounded-full border border-amber-200">
+                                規則：0 毫升不顯示數棒，僅標示數字
+                              </span>
+                        </div>
+                    </div>
+
+                    <!-- Horizontal Bar Chart Container -->
+                    <div class="w-full max-w-5xl mx-auto bg-slate-50 rounded-xl p-6 border border-slate-200/60">
+                        <!-- Chart Body: rows of horizontal bars -->
+                        <div id="chart-bars" class="flex flex-col gap-6 relative min-h-[150px]">
+                            <!-- Rows will be dynamically rendered here from bottom up (lowest cilia at bottom, highest at top) -->
+                            <div class="text-center py-12 text-slate-400 font-bold text-sm w-full">
+                                <p class="text-3xl mb-2">📊</p>
+                                <p>目前還沒有實驗記錄喔！請前往「第一頁」進行滴水測試。</p>
                             </div>
                         </div>
 
-                        <!-- Spacious Full-Width Chart Area with extra bottom padding for SVGs (pb-40 for 3x larger water drops) -->
-                        <div class="h-[420px] w-full relative flex flex-col justify-end border-b-2 border-l-2 border-slate-300 pb-40 pl-6 pt-6 mt-6 max-w-5xl mx-auto">
-                            <!-- Y Axis labels (0 to 20 毫升) with matching bottom bounds (bottom-40) -->
-                            <div class="absolute left-[-45px] top-0 bottom-40 flex flex-col justify-between text-[10px] font-bold text-slate-400 text-right w-10">
-                                <span>20 毫升</span>
-                                <span>15 毫升</span>
-                                <span>10 毫升</span>
-                                <span>5 毫升</span>
+                        <!-- Horizontal X-Axis Labels (proportional to the middle column width) -->
+                        <div class="grid grid-cols-[110px_1fr_192px] gap-4 text-xs font-black text-slate-400 mt-4 pt-3 border-t border-slate-300">
+                            <div class="text-right pr-4">纖毛數量(根)</div>
+                            <div class="flex justify-between px-1">
                                 <span>0 毫升</span>
+                                <span>5 毫升</span>
+                                <span>10 毫升</span>
+                                <span>15 毫升</span>
+                                <span>20 毫升</span>
                             </div>
-
-                            <!-- Grid lines aligned with bottom-40 -->
-                            <div class="absolute inset-0 bottom-40 flex flex-col justify-between pointer-events-none opacity-20 pr-4">
-                                <div class="border-b border-slate-400 w-full h-0"></div>
-                                <div class="border-b border-slate-400 w-full h-0"></div>
-                                <div class="border-b border-slate-400 w-full h-0"></div>
-                                <div class="border-b border-slate-400 w-full h-0"></div>
-                                <div class="border-b border-slate-400 w-full h-0"></div>
-                            </div>
-
-                            <!-- Bars wrapper -->
-                            <div id="chart-bars" class="w-full h-full flex justify-around items-end relative z-10 pr-4">
-                                <div class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 font-bold text-sm">
-                                    <p class="text-3xl mb-2">📊</p>
-                                    <p>目前還沒有實驗記錄喔！請前往「第一頁」進行滴水測試。</p>
-                                </div>
-                            </div>
+                            <div class="text-center">微觀水滴形態 (3x 放大)</div>
                         </div>
                     </div>
                 </div>
@@ -245,7 +239,7 @@
             <!-- ================= PAGE 3: CLASS CHART ================= -->
             <div id="tab-class" class="hidden">
                 <div class="bg-white border border-slate-100 rounded-xl p-5 shadow-sm flex flex-col">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-6 pb-3 border-b border-slate-100">
                         <div>
                             <div class="flex items-center gap-2">
                                 <h3 class="font-bold text-base sm:text-lg text-slate-800 flex items-center gap-2">
@@ -284,35 +278,29 @@
                         </div>
                     </div>
 
-                    <!-- Chart Visualizer with pb-40 bottom padding for Class 3x larger droplets and labels -->
-                    <div class="h-[400px] w-full relative flex flex-col justify-end border-b-2 border-l-2 border-slate-300 pb-40 pl-8 pr-4 pt-6 max-w-5xl mx-auto">
-                        <!-- Y Axis labels (0 to 20 毫升) with matching bottom bounds (bottom-40) -->
-                        <div class="absolute left-[-45px] top-0 bottom-40 flex flex-col justify-between text-[10px] font-bold text-slate-400 text-right w-10">
-                            <span>20 毫升</span>
-                            <span>15 毫升</span>
-                            <span>10 毫升</span>
-                            <span>5 毫升</span>
-                            <span>0 毫升</span>
-                        </div>
-
-                        <!-- Grid lines aligned with bottom-40 -->
-                        <div class="absolute inset-0 bottom-40 flex flex-col justify-between pointer-events-none opacity-20 pr-4">
-                            <div class="border-b border-slate-400 w-full h-0"></div>
-                            <div class="border-b border-slate-400 w-full h-0"></div>
-                            <div class="border-b border-slate-400 w-full h-0"></div>
-                            <div class="border-b border-slate-400 w-full h-0"></div>
-                            <div class="border-b border-slate-400 w-full h-0"></div>
-                        </div>
-
-                        <!-- Class Bars wrapper -->
-                        <div id="class-chart-bars" class="w-full h-full flex justify-around items-end relative z-10">
-                            <!-- Dynamic Class Bars -->
+                    <!-- Class Horizontal Bar Chart Container -->
+                    <div class="w-full max-w-5xl mx-auto bg-slate-50 rounded-xl p-6 border border-slate-200/60 relative">
+                        <div id="class-chart-bars" class="flex flex-col gap-6 relative min-h-[250px]">
+                            <!-- Dynamic Class Bars rendered from top (highest) to bottom (lowest) -->
                             <div class="absolute inset-0 flex items-center justify-center bg-white/80 z-20" id="class-chart-loader">
                                 <p class="text-xs sm:text-sm font-bold text-slate-500 flex items-center gap-2">
                                     <i class="fa-solid fa-spinner animate-spin text-emerald-600 text-base"></i>
                                     正在同步讀取 Google Sheet 數據中...
                                 </p>
                             </div>
+                        </div>
+
+                        <!-- Class Horizontal X-Axis Labels -->
+                        <div class="grid grid-cols-[110px_1fr_192px] gap-4 text-xs font-black text-slate-400 mt-4 pt-3 border-t border-slate-300">
+                            <div class="text-right pr-4">纖毛區間(根)</div>
+                            <div class="flex justify-between px-1">
+                                <span>0 毫升</span>
+                                <span>5 毫升</span>
+                                <span>10 毫升</span>
+                                <span>15 毫升</span>
+                                <span>20 毫升</span>
+                            </div>
+                            <div class="text-center">微觀水滴形態 (3x 放大)</div>
                         </div>
                     </div>
 
@@ -1018,6 +1006,8 @@
                 waterLeft: stuckCount, // Representing ml
                 time: nowTime
             });
+            
+            // Sort ascending by cilia (lowest cilia first)
             myRecords.sort((a, b) => a.cilia - b.cilia);
 
             if (!isTeacher) {
@@ -1088,8 +1078,11 @@
             // Keep table logic for database synchronization fallback, DOM rendering removed
         }
 
-        // Render Personal Bar Chart with "No Bar for 0" Rule
-        // Modified: Displays cleanly from top to bottom (Bar -> Number/Label -> Water Droplet Shape 3x Enlarged with ml unit)
+        // Render Personal Bar Chart as Horizontal Bars
+        // Modified: Y-axis (Vertical): Cilia Count, sorted descending (highest cilia at top, lowest 0 at bottom)
+        // This makes 10,000 (maximum) at bottom, increasing upwards to 0 (minimum) at top!
+        // X-axis (Horizontal): Water remaining (0-20 ml)
+        // Far Right: 3x Scaled water droplet shapes
         function renderBarChart() {
             const chartContainer = document.getElementById('chart-bars');
             if (!chartContainer) return;
@@ -1097,7 +1090,7 @@
 
             if (myRecords.length === 0) {
                 chartContainer.innerHTML = `
-                    <div class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 font-bold text-sm">
+                    <div class="text-center py-12 text-slate-400 font-bold text-sm w-full">
                         <p class="text-3xl mb-2">📊</p>
                         <p>目前還沒有實驗記錄喔！請前往「第一頁」進行滴水測試。</p>
                     </div>
@@ -1105,12 +1098,18 @@
                 return;
             }
 
-            myRecords.forEach((trial) => {
-                const barCol = document.createElement('div');
-                barCol.className = 'flex flex-col items-center justify-end h-full w-12 sm:w-20 group relative';
+            // Target order: Top row = 0 (minimum), Bottom row = 10,000 (maximum)
+            // Array sorted ascending: Index 0 is 0 (rendered first at the top), Index n is 10,000 (rendered last at the bottom)
+            const sortedRecords = [...myRecords].sort((a, b) => a.cilia - b.cilia);
+
+            sortedRecords.forEach((trial) => {
+                const rowDiv = document.createElement('div');
+                // Grid layout: Left Label (110px) | Horizontal bar container (1fr) | 3x droplet SVG (192px)
+                rowDiv.className = 'grid grid-cols-[110px_1fr_192px] items-center gap-4 py-2 animate-fade-in relative';
                 
-                const heightPct = Math.max(0, (trial.waterLeft / 20) * 100);
-                const displayCilia = trial.cilia.toLocaleString(); // Cilia Count
+                // Horizontal width percentage (proportional to 20 ml max capacity)
+                const widthPct = Math.max(0, (trial.waterLeft / 20) * 100);
+                const displayCilia = trial.cilia.toLocaleString() + ' 根';
 
                 // Calculate micro water droplet shape vector for X-axis comparison (3x Scale)
                 const progress = trial.cilia / 10000;
@@ -1125,10 +1124,10 @@
                 const cy = leafY - ry - (trial.cilia > 0 ? restingOffset : 0);
 
                 const dropletSvg = `
-                  <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" class="mt-1 drop-shadow-sm">
+                  <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" class="drop-shadow-sm">
                     <!-- Leaf segment line -->
                     <line x1="6" y1="${leafY}" x2="${width-6}" y2="${leafY}" stroke="#047857" stroke-width="7.5" stroke-linecap="round" />
-                    <!-- Micro cilia hairs -->
+                    <!-- Micro cilia hairs (3x thicker and longer) -->
                     ${trial.cilia > 0 ? `
                       <line x1="60" y1="${leafY}" x2="60" y2="${leafY - 12}" stroke="#10b981" stroke-width="4.5" />
                       <line x1="78" y1="${leafY}" x2="78" y2="${leafY - 15}" stroke="#10b981" stroke-width="4.5" />
@@ -1151,42 +1150,62 @@
                   </svg>
                 `;
 
+                // Render Bar Area
+                let barHtml = "";
                 if (trial.waterLeft === 0) {
-                    barCol.innerHTML = `
-                        <!-- Number 0 label at bottom of chart axis -->
-                        <div class="absolute bottom-2 font-black text-sm text-slate-400 h-6 flex items-center justify-center animate-fade-in">0</div>
-                        
-                        <!-- Labels & Shapes Container stacked below the baseline -->
-                        <div class="absolute top-[100%] pt-2 w-full flex flex-col items-center">
-                            <div class="text-[10px] font-black text-slate-500 truncate" title="纖毛數量: ${trial.cilia} 根">${displayCilia}</div>
-                            <div class="mt-1">${dropletSvg}</div>
+                    barHtml = `
+                        <div class="w-full h-12 flex items-center pl-2 relative bg-slate-100/40 rounded-lg">
+                            <!-- Background Grid reference lines -->
+                            <div class="absolute inset-0 flex justify-between pointer-events-none opacity-10">
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                            </div>
+                            <span class="font-extrabold text-sm text-slate-400 z-10 animate-fade-in">0 毫升</span>
                         </div>
                     `;
                 } else {
-                    barCol.innerHTML = `
-                        <!-- Hover Tooltip -->
-                        <div class="absolute top-[-30px] bg-slate-800 text-white text-[10px] py-1 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 shadow-sm whitespace-nowrap font-bold">
-                            纖毛數: ${trial.cilia.toLocaleString()} | 餘下 ${trial.waterLeft} 毫升
-                        </div>
-                        
-                        <!-- Colored Bar -->
-                        <div class="w-8 sm:w-10 bg-gradient-to-t from-emerald-600 to-teal-400 rounded-t-md transition-all duration-700 flex items-start justify-center pt-1 shadow-xs animate-fade-in" style="height: ${heightPct}%">
-                            <span class="text-[9px] text-white font-extrabold">${trial.waterLeft}</span>
-                        </div>
-                        
-                        <!-- Labels & Shapes Container stacked below the baseline -->
-                        <div class="absolute top-[100%] pt-2 w-full flex flex-col items-center">
-                            <div class="text-[10px] font-black text-slate-500 truncate" title="纖毛數量: ${trial.cilia} 根">${displayCilia}</div>
-                            <div class="mt-1">${dropletSvg}</div>
+                    barHtml = `
+                        <div class="w-full h-12 flex items-center relative bg-slate-100/40 rounded-lg pr-4">
+                            <!-- Background Grid reference lines -->
+                            <div class="absolute inset-0 flex justify-between pointer-events-none opacity-10">
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                            </div>
+                            <!-- Horizontal bar -->
+                            <div 
+                                style="width: ${widthPct}%" 
+                                class="h-8 bg-gradient-to-r from-emerald-500 to-teal-400 rounded-lg flex items-center justify-end px-3 shadow-sm transition-all duration-1000 ease-out animate-fade-in z-10"
+                            >
+                                <span class="text-xs font-black text-white">${trial.waterLeft} 毫升</span>
+                            </div>
                         </div>
                     `;
                 }
-                chartContainer.appendChild(barCol);
+
+                rowDiv.innerHTML = `
+                    <!-- Left column: Y-Axis Cilia Label -->
+                    <div class="text-right pr-4 font-black text-slate-600 text-xs sm:text-sm select-none">${displayCilia}</div>
+                    
+                    <!-- Middle column: Bar Area -->
+                    ${barHtml}
+                    
+                    <!-- Right column: 3x Scaled SVG water droplet matching Cilia count -->
+                    <div class="flex justify-center items-center h-28">${dropletSvg}</div>
+                `;
+
+                chartContainer.appendChild(rowDiv);
             });
         }
 
-        // Render Class Bar Chart from Google Sheets Data with "No Bar for 0" Rule
-        // Displays cleanly from top to bottom (Bar -> Range Label -> Water Droplet Shape 3x Enlarged with ml unit)
+        // Render Class Bar Chart as Horizontal Bars from Google Sheets Data
+        // Modified: Ordered from 0-2000 (rendered top row, index 0) to 8100-10000 (rendered bottom row, index 4)
+        // This puts 10,000 (maximum) at bottom, increasing upwards to 0 (minimum) at top!
         function renderClassChart() {
             const chartContainer = document.getElementById('class-chart-bars');
             if(!chartContainer) return;
@@ -1195,12 +1214,13 @@
             chartContainer.innerHTML = '';
             if (loader) chartContainer.appendChild(loader);
 
+            // 5 Scientific Density Ranges sorted from minimum to maximum (for top-to-bottom rendering)
             const ranges = [
-                { label: '0 - 2,000', min: 0, max: 2000 },
-                { label: '2,100 - 4,000', min: 2100, max: 4000 },
-                { label: '4,100 - 6,000', min: 4100, max: 6000 },
-                { label: '6,100 - 8,000', min: 6100, max: 8000 },
-                { label: '8,100 - 10,000', min: 8100, max: 10000 }
+                { label: '0 - 2,000 根', min: 0, max: 2000 },
+                { label: '2,100 - 4,000 根', min: 2100, max: 4000 },
+                { label: '4,100 - 6,000 根', min: 4100, max: 6000 },
+                { label: '6,100 - 8,000 根', min: 6100, max: 8000 },
+                { label: '8,100 - 10,000 根', min: 8100, max: 10000 }
             ];
 
             const classDataAvg = ranges.map(range => {
@@ -1211,16 +1231,17 @@
             });
 
             classDataAvg.forEach((data, rangeIdx) => {
-                const barCol = document.createElement('div');
-                barCol.className = 'flex flex-col items-center justify-end h-full w-14 sm:w-28 group relative';
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'grid grid-cols-[110px_1fr_192px] items-center gap-4 py-2 animate-fade-in relative';
                 
-                const heightPct = Math.max(0, (data.avg / 20) * 100);
+                const widthPct = Math.max(0, (data.avg / 20) * 100);
 
                 // Calculate micro water droplet shape vector for X-axis comparison (0 to 1.0 progress, 3x Scaled)
-                const progress = rangeIdx / 4; // 0, 0.25, 0.5, 0.75, 1.0
-                const width = 192; // 64 * 3
-                const height = 120; // 40 * 3
-                const leafY = 96; // 32 * 3
+                // index 0 (0-2000) -> progress 0.0 (flat), index 4 (8100-10000) -> progress 1.0 (round)
+                const progress = rangeIdx / 4; 
+                const width = 192;
+                const height = 120;
+                const leafY = 96;
                 
                 const rx = 39 + (30 * (1 - progress));
                 const ry = 39 - (24 * (1 - progress));
@@ -1229,7 +1250,7 @@
 
                 const hasCilia = progress > 0;
                 const dropletSvg = `
-                  <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" class="mt-1 drop-shadow-sm">
+                  <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" class="drop-shadow-sm">
                     <!-- Leaf segment line -->
                     <line x1="6" y1="${leafY}" x2="${width-6}" y2="${leafY}" stroke="#047857" stroke-width="7.5" stroke-linecap="round" />
                     <!-- Micro cilia hairs -->
@@ -1255,37 +1276,53 @@
                   </svg>
                 `;
 
+                // Render Bar Area
+                let barHtml = "";
                 if (data.avg === 0) {
-                    barCol.innerHTML = `
-                        <!-- Number 0 label at bottom of chart axis -->
-                        <div class="absolute bottom-2 font-black text-base text-slate-400 h-6 flex items-center justify-center">0</div>
-                        
-                        <!-- Labels & Shapes Container stacked below the baseline -->
-                        <div class="absolute top-[100%] pt-2 w-full flex flex-col items-center">
-                            <div class="text-[10px] sm:text-xs font-black text-slate-600 text-center whitespace-nowrap">${data.label}</div>
-                            <div class="mt-1">${dropletSvg}</div>
+                    barHtml = `
+                        <div class="w-full h-12 flex items-center pl-2 relative bg-slate-100/40 rounded-lg">
+                            <div class="absolute inset-0 flex justify-between pointer-events-none opacity-10">
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                            </div>
+                            <span class="font-extrabold text-sm text-slate-400 z-10 animate-fade-in">0 毫升</span>
                         </div>
                     `;
                 } else {
-                    barCol.innerHTML = `
-                        <!-- Hover Tooltip -->
-                        <div class="absolute top-[-40px] bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 shadow-sm whitespace-nowrap font-bold">
-                            樣本數: ${data.count} 筆實驗
-                        </div>
-                        
-                        <!-- Colored Bar -->
-                        <div class="w-10 sm:w-16 bg-gradient-to-t from-blue-600 to-sky-400 rounded-t-lg transition-all duration-700 flex justify-center shadow-sm relative animate-fade-in" style="height: ${heightPct}%">
-                            <span class="absolute -top-6 text-[10px] sm:text-[11px] text-slate-700 font-extrabold">${data.avg} 毫量</span>
-                        </div>
-                        
-                        <!-- Labels & Shapes Container stacked below the baseline -->
-                        <div class="absolute top-[100%] pt-2 w-full flex flex-col items-center">
-                            <div class="text-[10px] sm:text-xs font-black text-slate-600 text-center whitespace-nowrap">${data.label}</div>
-                            <div class="mt-1">${dropletSvg}</div>
+                    barHtml = `
+                        <div class="w-full h-12 flex items-center relative bg-slate-100/40 rounded-lg pr-4">
+                            <div class="absolute inset-0 flex justify-between pointer-events-none opacity-10">
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                                <div class="border-l border-slate-400 h-full"></div>
+                            </div>
+                            <div 
+                                style="width: ${widthPct}%" 
+                                class="h-8 bg-gradient-to-r from-blue-500 to-indigo-400 rounded-lg flex items-center justify-end px-3 shadow-sm transition-all duration-1000 ease-out animate-fade-in z-10"
+                            >
+                                <span class="text-xs font-black text-white">${data.avg} 毫升</span>
+                            </div>
                         </div>
                     `;
                 }
-                chartContainer.appendChild(barCol);
+
+                rowDiv.innerHTML = `
+                    <!-- Left column: Y-Axis Cilia Label -->
+                    <div class="text-right pr-4 font-black text-slate-600 text-xs sm:text-sm select-none">${data.label}</div>
+                    
+                    <!-- Middle column: Bar Area -->
+                    ${barHtml}
+                    
+                    <!-- Right column: 3x Scaled SVG water droplet matching Cilia count -->
+                    <div class="flex justify-center items-center h-28">${dropletSvg}</div>
+                `;
+
+                chartContainer.appendChild(rowDiv);
             });
         }
 
